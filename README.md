@@ -10,7 +10,7 @@
 </p>
 <p>&nbsp;</p>
 
-基于 vue3 + echarts + amap(高德地图) + pinia 开发的大屏可视化项目，支持拖拽布局。
+基于 vue3 + echarts + amap(高德地图) + pinia 开发的大屏可视化项目，支持拖拽布局
 
 ## usage
 
