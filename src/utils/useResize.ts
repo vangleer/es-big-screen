@@ -1,10 +1,11 @@
-import { ref, Ref, onMounted, onBeforeUnmount } from "vue"
+import { ref, onMounted, onBeforeUnmount } from "vue"
 
 // 默认适配宽高
 export const width = 1920
 export const height = 1080
 
-export const useResize = (boxRef: Ref<HTMLElement>, w: number = width, h: number = height) => {
+export const useResize = (w: number = width, h: number = height) => {
+	const screenRef = ref()
   const scale = ref(1)
   function resize() {
     // 浏览器宽高
@@ -17,13 +18,14 @@ export const useResize = (boxRef: Ref<HTMLElement>, w: number = width, h: number
     } else {
       scale.value = ww / w
     }
-    boxRef.value.style.transform = 'scale(' + scale.value + ')'
+    screenRef.value.style.transform = 'scale(' + scale.value + ')'
   }
 
   onMounted(() => {
-    resize()
-
-    window.addEventListener('resize', resize)
+		if (screenRef.value) {
+			resize()
+    	window.addEventListener('resize', resize)
+		}
   })
 
   onBeforeUnmount(() => {
@@ -31,6 +33,7 @@ export const useResize = (boxRef: Ref<HTMLElement>, w: number = width, h: number
   })
 
   return {
-    scale
+    scale,
+		screenRef
   }
 }

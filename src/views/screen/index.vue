@@ -1,23 +1,31 @@
 <template>
-  <div ref="boxRef" class="es-box">
-		{{ store.title }}
+	<div class="es-screen-container">
+		<div ref="screenRef" class="es-screen">
+			<Header />
+		</div>
 	</div>
+
 </template>
 
 <script setup lang='ts'>
-import { ref } from 'vue'
-import { useScreenStore } from '@/store'
+import Header from './components/Header.vue'
 import { useResize } from '@/utils/useResize'
 
-const store = useScreenStore()
-
-const boxRef = ref()
-
-useResize(boxRef)
+const { screenRef } = useResize()
 
 </script>
 <style lang='scss' scoped>
-.es-box {
+.es-screen-container {
+	position: relative;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	background-size: 100% 100%;
+	overflow: hidden;
+	background: #000;
+	color: #fff;
+}
+.es-screen {
   --es-screen-width: 1920px;
   --es-screen-height: 1080px;
   position: absolute;
@@ -29,6 +37,5 @@ useResize(boxRef)
   margin-left: calc(var(--es-screen-width) * 0.5 - var(--es-screen-width));
   margin-top: calc(var(--es-screen-height) * 0.5 - var(--es-screen-height));
   background-size: 100% 100%;
-  background-color: pink;
 }
 </style>
