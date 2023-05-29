@@ -14,8 +14,9 @@ const store = useScreenStore()
 .es-screen-header {
 	position: relative;
 	width: 100%;
-	height: 72px;
-	background-image: url('@/assets/images/screen/header_blank_bg.png');
+	height: var(--es-header-height);
+	// background-image: url('@/assets/images/screen/header_blank_bg.png');
+	background-color: var(--es-screen-bg);
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	&-title {
@@ -24,7 +25,7 @@ const store = useScreenStore()
 		top: 50%;
 		transform: translate(-50%, -50%);
 		width: 487px;
-		height: 72px;
+		height: var(--es-header-height);
 		display: flex;
 		justify-content: center;
 		align-items: center;
