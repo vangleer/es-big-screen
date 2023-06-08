@@ -7,7 +7,7 @@
 				<div class="es-screen-left">
 					<Left />
 				</div>
-				<div class="es-screen-center">center</div>
+				<div class="es-screen-center"></div>
 				<div class="es-screen-right">
 					<Right />
 				</div>

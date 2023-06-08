@@ -1,7 +1,7 @@
 <template>
-	<div class="es-screen-right-item">right1</div>
-	<div class="es-screen-right-item">right2</div>
-	<div class="es-screen-right-item">right3</div>
+	<div class="es-screen-right-item"></div>
+	<div class="es-screen-right-item"></div>
+	<div class="es-screen-right-item"></div>
 </template>
 
 <script setup lang='ts'>

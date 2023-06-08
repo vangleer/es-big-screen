@@ -4,7 +4,7 @@ export const useScreenStore = defineStore({
 	id: 'screen',
 	state: () => {
 		return {
-			title: '大屏可视化'
+			title: ''
 		}
 	}
 })
