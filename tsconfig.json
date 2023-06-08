@@ -17,7 +17,6 @@
     "skipLibCheck": true,
     "noEmit": true,
     "types": [
-      "element-plus/global",
       "@types/node"
     ],
     "baseUrl": ".",
