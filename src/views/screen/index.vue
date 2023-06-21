@@ -7,7 +7,9 @@
 				<div class="es-screen-left">
 					<Left />
 				</div>
-				<div class="es-screen-center"></div>
+				<div class="es-screen-center">
+					<Center />
+				</div>
 				<div class="es-screen-right">
 					<Right />
 				</div>
@@ -22,6 +24,7 @@ import Header from './components/Header.vue'
 import { useResize } from '@/utils/useResize'
 import Left from './components/left/index.vue'
 import Right from './components/right/index.vue'
+import Center from './components/center/index.vue'
 const { screenRef } = useResize()
 
 </script>

@@ -1,3 +1,37 @@
+# es-big-screen 大屏可视化 (demo版)
+
+基于 vue3 + echarts + amap(高德地图) + pinia 开发的大屏可视化项目，支持拖拽布局
+
+<p align="center">
+	<a href="https://www.npmjs.com/package/vue" target="_blank">
+		<img src="https://img.shields.io/badge/vuejs-vue3.x-green" alt="vue">
+	</a>
+	<a href="https://www.npmjs.com/package/typescript" target="_blank">
+		<img src="https://img.shields.io/badge/typescript-%3E4.0.0-blue" alt="typescript">
+	</a>
+</p>
+<p>&nbsp;</p>
+
+
+## 主要功能
+
+- 大屏适配
+- echarts 组件封装
+- 拖拽布局
+- 地图组件封装
+
+## 大屏的适配
+
+大屏适配常用的方案有 `rem + vw/vh` 和 `scale`
+
+rem + vw/vh方案是一种结合使用rem（相对于根元素字体大小的单位）和vw/vh（视窗宽度/高度的单位）来实现大屏的适配。它的优点是灵活性高、兼容性好、适应性强，但需要进行计算，可能存在误差问题，且代码复杂度较高。
+
+另一种是scale方案，它通过改变页面根元素的缩放比例来实现大屏适配。它的优点是实现简单，不需要进行计算，且适用范围广，但可能会存在像素失真问题。
+
+这里我们使用 scale 缩放这种方式来实现
+
+```typescript
+// src/utiles/useResize.ts
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 // 默认适配宽高
@@ -64,10 +98,17 @@ export const useResize = (options: ResizeType = {}) => {
 		screenRef
   }
 }
+```
 
-/*
-用来返回防抖函数的工具函数
-*/
+核心代码在resize函数中
+
+- 首先要确定我们的设计稿尺寸，默认是 `1920 x 1080`
+- 分别计算浏览器和设计图宽高比
+- 如果浏览器的宽高比大于设计稿的宽高比，就取浏览器高度:设计稿高度，否则取浏览器宽度:设计稿宽度
+- 如果想全屏缩放，就分别使用宽高比进行缩放
+- 处于性能考虑，useResize中使用了防抖，实现如下
+
+```typescript
 function debounce(callback, delay) {
 	let timerId
 	return function (event) {
@@ -86,3 +127,25 @@ function debounce(callback, delay) {
 		}, delay)
 	}
 }
+```
+
+### 使用就非常简单了
+
+将 `useResize` 返回的 screenRef 赋值需要缩放的元素即可
+
+```html
+
+<template>
+	<div ref="screenRef"></div>
+</template>
+
+<script setup lang='ts'>
+import { useResize } from '@/utils/useResize'
+const { screenRef } = useResize()
+</script>
+
+```
+
+## echarts 组件封装
+
+
