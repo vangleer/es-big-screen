@@ -148,4 +148,10 @@ const { screenRef } = useResize()
 
 ## echarts 组件封装
 
+### 安装依赖
 
+```sh
+yarn add echarts
+```
+
+### 封装

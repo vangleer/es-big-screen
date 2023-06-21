@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@types/node": "^20.2.3",
+    "echarts": "^5.4.2",
     "es-drager": "^0.3.5",
     "pinia": "^2.1.3",
     "sass": "^1.62.1",
