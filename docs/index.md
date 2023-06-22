@@ -154,4 +154,4 @@ const { screenRef } = useResize()
 yarn add echarts
 ```
 
-### 封装
+### 封装Char组件

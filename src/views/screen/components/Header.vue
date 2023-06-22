@@ -1,7 +1,7 @@
 <template>
 	<div class="es-screen-header">
 	<h1 class="es-screen-logo">
-		<img :src="logo" />
+		<span>ES Big Screen</span>
 	</h1>
 		<div class="es-screen-header-title">{{ store.title }}</div>
 		<div class="es-screen-header-right">
@@ -56,6 +56,7 @@ function handleChangeTheme() {
 	.es-screen-logo {
 		display: flex;
     align-items: center;
+		height: calc(var(--es-header-height) - 20px);
 	}
 	&-right {
 		display: flex;

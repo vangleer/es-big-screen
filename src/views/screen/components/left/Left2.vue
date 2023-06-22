@@ -13,10 +13,9 @@ import Title from '../Title.vue'
 import Chart from '@/components/chart/Chart.vue'
 import allData from '@/assets/data/seller.json'
 import * as echarts from 'echarts'
-import { EChartsOption } from 'echarts'
 
 const barWidth = 22
-const option = ref<EChartsOption>({
+const option = ref({
 	grid: {
 		top: '10%',
 		left: '5%',

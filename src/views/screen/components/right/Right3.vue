@@ -13,7 +13,6 @@ import Title from '../Title.vue'
 import Chart from '@/components/chart/Chart.vue'
 import allData from '@/assets/data/rank.json'
 import * as echarts from 'echarts'
-import { EChartsOption } from 'echarts'
 const colorArr = [
 	['#0BA82C', '#4FF778'],
 	['#2E72BF', '#23E5E5'],
@@ -22,7 +21,7 @@ const colorArr = [
 const startValue = ref(0)
 const endValue = ref(9)
 const barWidth = 20
-const option = ref<EChartsOption>({
+const option = ref({
 	grid: {
 		top: '10%',
 		left: '5%',

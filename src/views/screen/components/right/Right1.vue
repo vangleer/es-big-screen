@@ -12,10 +12,9 @@ import { ref } from 'vue'
 import Title from '../Title.vue'
 import Chart from '@/components/chart/Chart.vue'
 import allData from '@/assets/data/hot.json'
-import { EChartsOption } from 'echarts'
 
 const currentIndex = ref(0)
-const option = ref<EChartsOption>({
+const option = ref({
 	grid: {
 		containLabel: false,
 	},
@@ -42,7 +41,7 @@ const option = ref<EChartsOption>({
 			let retStr = ''
 			thirdCategory.forEach(item => {
 				retStr += `
-				${item.name}:${parseInt(item.value / total * 100) + '%'}
+				${item.name}:${Number(item.value / total * 100) + '%'}
 				<br/>
 				`
 			})

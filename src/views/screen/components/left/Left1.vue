@@ -13,10 +13,8 @@ import Title from '../Title.vue'
 import Chart from '@/components/chart/Chart.vue'
 import allData from '@/assets/data/trend.json'
 import * as echarts from 'echarts'
-import { EChartsOption } from 'echarts'
-
 const choiceType = 'map'
-const option = ref<EChartsOption>({
+const option = ref({
 	grid: {
 		left: '3%',
 		top: '25%',

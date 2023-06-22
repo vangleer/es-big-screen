@@ -13,10 +13,9 @@ import Title from '../Title.vue'
 import Chart from '@/components/chart/Chart.vue'
 import allData from '@/assets/data/stock.json'
 import * as echarts from 'echarts'
-import { EChartsOption } from 'echarts'
 
 const currentIndex = ref(0)
-const option = ref<EChartsOption>({
+const option = ref({
 	series: getSeries()
 })
 

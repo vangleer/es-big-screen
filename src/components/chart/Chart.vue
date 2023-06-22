@@ -5,12 +5,13 @@
 <script setup lang='ts'>
 import { onMounted, PropType, shallowRef, watch } from 'vue'
 import * as echarts from 'echarts'
-import { EChartsOption, ECharts } from 'echarts'
+import { ECharts, EChartsCoreOption } from 'echarts'
 
 const props = defineProps({
 	option: {
-		type: Object as PropType<EChartsOption>,
-		required: true
+		type: Object as PropType<EChartsCoreOption>,
+		required: true,
+		default: () => ({})
 	},
 	autoresize: {
 		type: Boolean
@@ -32,7 +33,7 @@ function setOption(option) {
 }
 
 function resize() {
-	chart.value.resize()
+	chart.value!.resize()
 }
 
 watch(() => props.option, () => {

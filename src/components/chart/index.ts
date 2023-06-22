@@ -3,7 +3,9 @@ import Chart from './Chart.vue'
 import * as echarts from 'echarts/core'
 
 // Import bar charts, all suffixed with Chart
-import { BarChart } from 'echarts/charts'
+import {
+	BarChart,
+} from 'echarts/charts'
 
 // Import the tooltip, title, rectangular coordinate system, dataset and transform components
 import {
@@ -22,28 +24,22 @@ import { LabelLayout, UniversalTransition } from 'echarts/features'
 import { CanvasRenderer } from 'echarts/renderers'
 import { App } from 'vue'
 
-import chalk from './theme/chalk.json'
-import vintage from './theme/vintage.json'
-
-// Register the required components
-echarts.use([
-  BarChart,
-  TitleComponent,
-  TooltipComponent,
-  GridComponent,
-  DatasetComponent,
-  TransformComponent,
-  LabelLayout,
-  UniversalTransition,
-  CanvasRenderer
-])
-
-// echarts.registerTheme('chalk', chalk)
-// echarts.registerTheme('vintage', vintage)
-
 export const install = (app: App) => {
 	app.component('v-chart', Chart)
 }
+
+// Register the required components
+echarts.use([
+	BarChart,
+	TitleComponent,
+	TooltipComponent,
+	GridComponent,
+	DatasetComponent,
+	TransformComponent,
+	LabelLayout,
+	UniversalTransition,
+	CanvasRenderer
+])
 
 export default {
 	install
