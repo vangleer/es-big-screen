@@ -29,12 +29,14 @@ const { containerRef } = useSortable(components)
 <style lang='scss' scoped>
 .es-screen-left-item {
 	width: 100%;
-	height: 400px;
-	margin-top: 20px;
-	background-color: var(--es-screen-bg);
+	height: 410px;
+	background-color: var(--es-block-bg);
 	padding: 16px;
+	& + & {
+		margin-top: 20px;
+	}
 	&[name=left1] {
-		height: 500px;
+		height: 510px;
 	}
 }
 </style>

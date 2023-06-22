@@ -1,9 +1,9 @@
 <template>
-	<div class="es-screen-title">
+	<h3 class="es-screen-title">
 		<slot>
 			{{ title }}
 		</slot>
-	</div>
+	</h3>
 </template>
 
 <script setup lang='ts'>
@@ -23,7 +23,7 @@ defineProps({
 		top: 0;
 		width: 3px;
 		height: 100%;
-		background-color: #fff;
+		background-color: var(--es-screen-text-color);
 	}
 }
 </style>

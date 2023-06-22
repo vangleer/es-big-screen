@@ -16,7 +16,6 @@ import * as echarts from 'echarts'
 import { EChartsOption } from 'echarts'
 
 const choiceType = 'map'
-console.log(allData, 'data')
 const option = ref<EChartsOption>({
 	grid: {
 		left: '3%',

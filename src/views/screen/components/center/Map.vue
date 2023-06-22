@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang='ts'>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import Title from '../Title.vue'
 import Chart from '@/components/chart/Chart.vue'
 import allData from '@/assets/data/map.json'
@@ -59,5 +59,6 @@ const option = ref<EChartsOption>({
 	width: 100%;
 	height: 100%;
 	padding: 16px;
+	// background-color: var(--es-block-bg);
 }
 </style>

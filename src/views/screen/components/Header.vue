@@ -5,6 +5,8 @@
 	</h1>
 		<div class="es-screen-header-title">{{ store.title }}</div>
 		<div class="es-screen-header-right">
+			<img :src="githubIcon" />
+			<img class="theme-change" :src="icon" @click="handleChangeTheme">
 			<span class="datetime">2049-01-01 00:00:00</span>
 		</div>
 	</div>
@@ -13,7 +15,19 @@
 <script setup lang='ts'>
 import { useScreenStore } from '@/store'
 import logo from '@/assets/vue.svg'
+import darkIcon from '@/assets/images/screen/qiehuan_dark.png'
+import lightIcon from '@/assets/images/screen/qiehuan_light.png'
+import githubIcon from '@/assets/github.svg'
+import { computed } from 'vue'
 const store = useScreenStore()
+
+const icon = computed(() => store.theme === 'dark' ? darkIcon : lightIcon)
+
+function handleChangeTheme() {
+	store.$patch({
+		theme: store.theme === 'dark' ? 'light' : 'dark'
+	})
+}
 </script>
 
 <style lang='scss' scoped>
@@ -39,7 +53,10 @@ const store = useScreenStore()
 		letter-spacing: 7px;
 		text-shadow: 0px 2px 20px rgba(222,171,155,0.6);
 	}
-
+	.es-screen-logo {
+		display: flex;
+    align-items: center;
+	}
 	&-right {
 		display: flex;
     align-items: center;
@@ -47,6 +64,15 @@ const store = useScreenStore()
     right: 0px;
     top: 50%;
     transform: translateY(-80%);
+		img {
+			width: 30px;
+			margin-right: 16px;
+			cursor: pointer;
+			transition: .3s cubic-bezier(.175,.885,.32,1.275);
+			&:hover {
+				transform: scale(1.2);
+			}
+		}
 	}
 }
 

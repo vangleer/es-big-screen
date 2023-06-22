@@ -18,10 +18,10 @@ import { EChartsOption } from 'echarts'
 const barWidth = 22
 const option = ref<EChartsOption>({
 	grid: {
-		top: '20%',
-		left: '3%',
-		right: '6%',
-		bottom: '3%',
+		top: '10%',
+		left: '5%',
+		right: '10%',
+		bottom: '5%',
 		containLabel: true // 距离是包含坐标轴上的文字
 	},
 	xAxis: {

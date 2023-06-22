@@ -30,8 +30,10 @@ const { containerRef } = useSortable(components)
 .es-screen-right-item {
 	width: 100%;
 	height: 300px;
-	margin-top: 20px;
-	background-color: var(--es-screen-bg);
+	background-color: var(--es-block-bg);
 	padding: 16px;
+	& + & {
+		margin-top: 20px;
+	}
 }
 </style>
