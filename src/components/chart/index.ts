@@ -22,6 +22,9 @@ import { LabelLayout, UniversalTransition } from 'echarts/features'
 import { CanvasRenderer } from 'echarts/renderers'
 import { App } from 'vue'
 
+import chalk from './theme/chalk.json'
+import vintage from './theme/vintage.json'
+
 // Register the required components
 echarts.use([
   BarChart,
@@ -34,6 +37,9 @@ echarts.use([
   UniversalTransition,
   CanvasRenderer
 ])
+
+// echarts.registerTheme('chalk', chalk)
+// echarts.registerTheme('vintage', vintage)
 
 export const install = (app: App) => {
 	app.component('v-chart', Chart)

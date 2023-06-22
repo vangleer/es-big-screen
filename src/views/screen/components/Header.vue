@@ -1,12 +1,18 @@
 <template>
 	<div class="es-screen-header">
+	<h1 class="es-screen-logo">
+		<img :src="logo" />
+	</h1>
 		<div class="es-screen-header-title">{{ store.title }}</div>
+		<div class="es-screen-header-right">
+			<span class="datetime">2049-01-01 00:00:00</span>
+		</div>
 	</div>
 </template>
 
 <script setup lang='ts'>
 import { useScreenStore } from '@/store'
-
+import logo from '@/assets/vue.svg'
 const store = useScreenStore()
 </script>
 
@@ -15,8 +21,7 @@ const store = useScreenStore()
 	position: relative;
 	width: 100%;
 	height: var(--es-header-height);
-	// background-image: url('@/assets/images/screen/header_blank_bg.png');
-	background-color: var(--es-screen-bg);
+	background-image: url('@/assets/images/screen/header_border_dark.png');
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	&-title {
@@ -33,6 +38,15 @@ const store = useScreenStore()
 		font-weight: 500;
 		letter-spacing: 7px;
 		text-shadow: 0px 2px 20px rgba(222,171,155,0.6);
+	}
+
+	&-right {
+		display: flex;
+    align-items: center;
+    position:absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-80%);
 	}
 }
 

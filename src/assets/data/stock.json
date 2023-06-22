@@ -1,0 +1,41 @@
+[{
+    "name": "IPhone 11",
+    "stock": 2310,
+    "sales": 2103
+}, {
+    "name": "长筒靴系带",
+    "stock": 34312,
+    "sales": 23509
+}, {
+    "name": "打底毛衣宽松",
+    "stock": 22140,
+    "sales": 12830
+}, {
+    "name": "厚款羽绒服",
+    "stock": 10842,
+    "sales": 5492
+}, {
+    "name": "牛仔裤",
+    "stock": 68102,
+    "sales": 44043
+}, {
+    "name": "加厚卫衣",
+    "stock": 12032,
+    "sales": 8603
+}, {
+    "name": "衬衫",
+    "stock": 9890,
+    "sales": 8960
+}, {
+    "name": "HUAWEI P30",
+    "stock": 20130,
+    "sales": 12302
+}, {
+    "name": "手机壳",
+    "stock": 89342,
+    "sales": 42948
+}, {
+    "name": "打底裤",
+    "stock": 5034,
+    "sales": 1220
+}]

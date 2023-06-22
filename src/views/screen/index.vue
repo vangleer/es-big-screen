@@ -36,14 +36,14 @@ const { screenRef } = useResize()
 	height: 100%;
 	background-size: 100% 100%;
 	overflow: hidden;
-	background: #000;
+	background: #161522;
 	color: #fff;
 }
 .es-screen {
   --es-screen-width: 1920px;
   --es-screen-height: 1080px;
 	--es-header-height: 72px;
-	--es-screen-bg: rgba(19, 117, 255, .1);
+	--es-screen-bg: #222733;
   position: absolute;
   user-select: none;
   top: 50%;
@@ -53,7 +53,7 @@ const { screenRef } = useResize()
   margin-left: calc(var(--es-screen-width) * 0.5 - var(--es-screen-width));
   margin-top: calc(var(--es-screen-height) * 0.5 - var(--es-screen-height));
   background-size: 100% 100%;
-
+	padding: 0 20px;
 	&-main {
 		position: relative;
 		display: flex;
@@ -63,7 +63,7 @@ const { screenRef } = useResize()
 		flex: 1;
 	}
 	&-left, &-right {
-		width: 390px;
+		width: 460px;
 	}
 }
 
