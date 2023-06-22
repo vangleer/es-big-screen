@@ -13,23 +13,19 @@ const props = defineProps({
 		required: true,
 		default: () => ({})
 	},
-	autoresize: {
-		type: Boolean
-	}
+	loading: Boolean
 })
 const chartRef = shallowRef<HTMLElement | null>(null)
 
 const chart = shallowRef<ECharts | null>(null)
 function init() {
 	if (props.option) {
-		chart.value = echarts.init(chartRef.value!, 'chalk')
+		chart.value = echarts.init(chartRef.value!)
 		setOption(props.option)
 	}
 }
-function setOption(option) {
-	if (!chart.value) return console.warn('')
-
-	chart.value.setOption(option)
+function setOption(option, notMerge?: boolean, lazyUpdate?: boolean) {
+	chart.value!.setOption(option, notMerge, lazyUpdate)
 }
 
 function resize() {
@@ -38,6 +34,16 @@ function resize() {
 
 watch(() => props.option, () => {
 	setOption(props.option)
+})
+
+// show loading
+watch(() => props.loading, (val) => {
+	if (!chart.value) return
+	if (val) {
+		chart.value!.showLoading()
+	} else {
+		chart.value!.hideLoading()
+	}
 })
 
 onMounted(() => {

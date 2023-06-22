@@ -155,3 +155,174 @@ yarn add echarts
 ```
 
 ### 封装Char组件
+
+- 按需引入 `src/components/chart/index.ts`
+
+```typescript
+import Chart from './Chart.vue'
+// Import the echarts core module, which provides the necessary interfaces for using echarts.
+import * as echarts from 'echarts/core'
+
+// Import bar charts, all suffixed with Chart
+import {
+	BarChart,
+} from 'echarts/charts'
+
+// Import the tooltip, title, rectangular coordinate system, dataset and transform components
+import {
+  TitleComponent,
+  TooltipComponent,
+  GridComponent,
+  DatasetComponent,
+  TransformComponent
+} from 'echarts/components'
+
+// Features like Universal Transition and Label Layout
+import { LabelLayout, UniversalTransition } from 'echarts/features'
+
+// Import the Canvas renderer
+// Note that including the CanvasRenderer or SVGRenderer is a required step
+import { CanvasRenderer } from 'echarts/renderers'
+import { App } from 'vue'
+
+export const install = (app: App) => {
+	app.component('v-chart', Chart)
+}
+
+// Register the required components
+echarts.use([
+	BarChart,
+	TitleComponent,
+	TooltipComponent,
+	GridComponent,
+	DatasetComponent,
+	TransformComponent,
+	LabelLayout,
+	UniversalTransition,
+	CanvasRenderer
+])
+
+export default {
+	install
+}
+
+```
+
+- Chart 组件 `src/components/chart/Chart.vue`
+
+```html
+
+<template>
+	<div ref="chartRef" className='es-chart'></div>
+</template>
+
+<script setup lang='ts'>
+import { onMounted, PropType, shallowRef, watch } from 'vue'
+import * as echarts from 'echarts'
+import { ECharts, EChartsCoreOption } from 'echarts'
+
+const props = defineProps({
+	option: {
+		type: Object as PropType<EChartsCoreOption>,
+		required: true,
+		default: () => ({})
+	},
+	loading: Boolean
+})
+const chartRef = shallowRef<HTMLElement | null>(null)
+
+const chart = shallowRef<ECharts | null>(null)
+function init() {
+	if (props.option) {
+		chart.value = echarts.init(chartRef.value!)
+		setOption(props.option)
+	}
+}
+function setOption(option, notMerge?: boolean, lazyUpdate?: boolean) {
+	chart.value!.setOption(option, notMerge, lazyUpdate)
+}
+
+function resize() {
+	chart.value!.resize()
+}
+
+watch(() => props.option, () => {
+	setOption(props.option)
+})
+
+// show loading
+watch(() => props.loading, (val) => {
+	if (!chart.value) return
+	if (val) {
+		chart.value!.showLoading()
+	} else {
+		chart.value!.hideLoading()
+	}
+})
+
+onMounted(() => {
+	init()
+})
+
+defineExpose({
+	chart,
+	setOption,
+	resize
+})
+</script>
+
+<style lang='scss' scoped>
+.es-chart {
+	width: 100%;
+	height: 100%;
+}
+</style>
+```
+
+- 注册组件 `src/main.ts`
+
+```typescript
+
+import { createApp } from 'vue'
+import App from './App.vue'
+import * as chart from './components/chart'
+createApp(App).use(chart).mount('#app')
+
+```
+
+```html
+
+<template>
+	<v-chart ref="chartRef" :option="option" />
+</template>
+
+<script setup lang='ts'>
+import { ref } from 'vue'
+const chartRef = ref()
+const option = ref({
+  xAxis: {
+    type: 'category',
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      data: [120, 200, 150, 80, 70, 110, 130],
+      type: 'bar',
+      showBackground: true,
+      backgroundStyle: {
+        color: 'rgba(180, 180, 180, 0.2)'
+      }
+    }
+  ]
+})
+</script>
+
+```
+
+上面只是对echarts的简单封装，当组件挂载后我们可以使用 `chartRef.value.chart` echarts的实例，完成一些复杂的功能
+
+
+## 组件拖拽
