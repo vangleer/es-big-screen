@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
+    "@amap/amap-jsapi-types": "^0.0.13",
     "@types/node": "^20.2.3",
     "echarts": "^5.4.2",
     "es-drager": "^0.3.5",

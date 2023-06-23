@@ -1,5 +1,7 @@
 # es-big-screen 大屏可视化 (demo版)
 
+![banner]('./images/banner.png')
+
 基于 vue3 + echarts + amap(高德地图) + pinia 开发的大屏可视化项目，支持拖拽布局
 
 <p align="center">
@@ -106,7 +108,7 @@ export const useResize = (options: ResizeType = {}) => {
 - 分别计算浏览器和设计图宽高比
 - 如果浏览器的宽高比大于设计稿的宽高比，就取浏览器高度:设计稿高度，否则取浏览器宽度:设计稿宽度
 - 如果想全屏缩放，就分别使用宽高比进行缩放
-- 处于性能考虑，useResize中使用了防抖，实现如下
+- 出于对性能的考虑，useResize中使用了防抖，实现如下
 
 ```typescript
 function debounce(callback, delay) {
@@ -145,6 +147,10 @@ const { screenRef } = useResize()
 </script>
 
 ```
+
+- 效果演示
+
+![01](./images/01.gif)
 
 ## echarts 组件封装
 
@@ -322,7 +328,176 @@ const option = ref({
 
 ```
 
+![02](./images/02.png)
+
 上面只是对echarts的简单封装，当组件挂载后我们可以使用 `chartRef.value.chart` echarts的实例，完成一些复杂的功能
 
 
-## 组件拖拽
+## 组件的拖拽
+
+这里我们使用了 SortableJS 来实现拖拽
+
+SortableJS是一个强大的JavaScript库，用于创建可排序、可拖放和可交互的列表。它提供了一种简单的方法来实现拖放排序功能，使用户可以通过拖动列表项来重新排序它们。
+
+### 安装依赖
+
+```sh
+yarn add sortablejs
+```
+
+### 封装useSortable
+
+```typescript
+// src/utils/useSortable.ts
+
+import { ref, onMounted, Ref } from 'vue'
+import Sortable from 'sortablejs'
+
+export const useSortable = (listRef: Ref<any[]>) => {
+
+	// 容器元素
+	const containerRef = ref()
+
+	onMounted(() => {
+		Sortable.create(containerRef.value!, {
+			swapThreshold: 1,
+			animation: 150,
+			onUpdate(e) {
+				const item = listRef.value[e.oldIndex]
+				listRef.value.splice(e.oldIndex, 1)
+				listRef.value.splice(e.newIndex, 0, item)
+			}
+		})
+	})
+
+	return {
+		containerRef
+	}
+}
+
+```
+
+### 使用方式
+
+```html
+<template>
+	<div ref="containerRef">
+		<component
+			v-for="item in components"
+			:key="item.name"
+			:is="item.component"
+			class="es-screen-right-item"
+		>
+			{{ item.name }}
+		</component>
+	</div>
+</template>
+
+<script setup lang='ts'>
+import { shallowRef } from 'vue'
+import { useSortable } from '@/utils/useSortable'
+import Right1 from './Right1.vue'
+import Right2 from './Right2.vue'
+import Right3 from './Right3.vue'
+const components = shallowRef([
+	{ name: 'right1', component: Right1 },
+	{ name: 'right2', component: Right2 },
+	{ name: 'right3', component: Right3 }
+])
+
+const { containerRef } = useSortable(components)
+</script>
+
+<style lang='scss' scoped>
+.es-screen-right-item {
+	width: 100%;
+	height: 300px;
+	background-color: var(--es-block-bg);
+	padding: 16px;
+	& + & {
+		margin-top: 20px;
+	}
+}
+</style>
+
+```
+
+useSortable 会返回父元素的ref将其挂载到列表标签上即可，如果希望列表数据也交换需要将列表传入到函数中
+
+效果演示
+
+![03](./images/03.gif)
+
+
+## 地图封装 AMap
+
+[高德地图 JS API 2.0](https://lbs.amap.com/api/jsapi-v2)
+
+在开发大屏项目时可能也会遇到地图相关的需求，这就需要使用原生的地图，这里使用的是高德地图
+
+使用前需要注册开发者账号，申请API Key，服务平台选择 `Web端(JS API)`
+
+### 安装依赖
+
+```sh
+
+yarn add @amap/amap-jsapi-loader
+yarn add @amap/amap-jsapi-types -D
+
+```
+
+### vue 组件
+
+```html
+<template>
+	<div id="mapContainer"></div>
+</template>
+
+<script setup lang='ts'>
+import { onMounted, shallowRef } from 'vue'
+import '@amap/amap-jsapi-types'
+import AMapLoader from '@amap/amap-jsapi-loader'
+
+const map = shallowRef<AMap.Map | null>(null)
+
+function initMap() {
+  AMapLoader.load({
+		key: '', // 申请好的Web端开发者Key，首次调用 load 时必填
+		version: '2.0', // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
+		plugins: [], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
+	}).then((MyAMap: typeof AMap)=>{
+		map.value = new MyAMap.Map('mapContainer',{
+			mapStyle: 'amap://styles/darkblue'
+		})
+	}).catch(e=>{
+		console.log(e);
+	})
+}
+
+onMounted(() => {
+	initMap()
+})
+
+defineExpose({
+	map
+})
+</script>
+
+<style lang='scss'>
+#mapContainer {
+	width: 100%;
+	height: 100%;
+}
+.amap-logo, .amap-copyright {
+	opacity: 0;
+}
+</style>
+
+```
+
+![04](./images/04.png)
+
+因为直接选用的是AMap默认支持的主题，样式有点不协调(●'◡'●)，不过我们可以按照设计图要求去官网自定义主题
+
+
+

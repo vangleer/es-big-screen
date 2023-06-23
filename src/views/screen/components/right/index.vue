@@ -29,7 +29,7 @@ const { containerRef } = useSortable(components)
 <style lang='scss' scoped>
 .es-screen-right-item {
 	width: 100%;
-	height: 300px;
+	height: 320px;
 	background-color: var(--es-block-bg);
 	padding: 16px;
 	& + & {

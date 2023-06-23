@@ -1,7 +1,7 @@
 <template>
 	<div class="es-block">
 		<Title>商家分布</Title>
-    <div style="width: 100%;height: 90%;">
+    <div style="width: 100%;height: 98%;">
 			<Chart :option="option" />
 		</div>
 	</div>
@@ -14,7 +14,6 @@ import Chart from '@/components/chart/Chart.vue'
 import allData from '@/assets/data/map.json'
 import chinaJson from '@/assets/data/china.json'
 import * as echarts from 'echarts'
-
 echarts.registerMap('china', chinaJson as any)
 const option = ref({
 	geo: {
