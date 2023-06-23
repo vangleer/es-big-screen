@@ -1,6 +1,8 @@
 # es-big-screen 大屏可视化 (demo版)
 
-基于 vue3 + echarts + amap(高德地图) 开发的大屏可视化项目
+基于 vue3 + echarts + amap(高德地图) + pinia 开发的大屏可视化项目，支持拖拽布局
+
+![banner](./docs/images/banner.png)
 
 <p align="center">
 	<a href="https://www.npmjs.com/package/vue" target="_blank">

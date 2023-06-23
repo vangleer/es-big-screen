@@ -1,6 +1,6 @@
 # es-big-screen 大屏可视化 (demo版)
 
-![banner]('./images/banner.png')
+![banner](./images/banner.png)
 
 基于 vue3 + echarts + amap(高德地图) + pinia 开发的大屏可视化项目，支持拖拽布局
 

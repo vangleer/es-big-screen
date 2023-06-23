@@ -4,15 +4,17 @@ import { resolve } from 'path'
 const pathResolve = (dir: string): string => {
   return resolve(__dirname, '.', dir)
 }
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [vue()],
-  resolve: {
-    alias: {
-      '@': pathResolve('src')
-    }
-  },
-  server: {
-    port: 3006
+export default defineConfig(({ mode }) => {
+  return {
+    plugins: [vue()],
+    base: mode === 'production' ? '/es-big-screen' : '',
+		resolve: {
+			alias: {
+				'@': pathResolve('src')
+			}
+		},
+		server: {
+			port: 3006
+		}
   }
 })

@@ -2,6 +2,12 @@
   "name": "es-big-screen",
   "version": "0.0.0",
   "type": "module",
+	"description": "big screen visualization project based on vue3 + echarts + amap(AMAP) + pinia, supporting drag and drop layout",
+	"homepage": "https://github.com/vangleer/es-big-screen",
+  "bugs": {
+    "url": "https://github.com/vangleer/es-big-screen/issues"
+  },
+	"license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
