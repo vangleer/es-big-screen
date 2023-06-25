@@ -7,27 +7,44 @@
 		<div class="es-screen-header-right">
 			<img :src="githubIcon" />
 			<img class="theme-change" :src="icon" @click="handleChangeTheme">
-			<span class="datetime">2049-01-01 00:00:00</span>
+			<span class="datetime">{{ currentTime }}</span>
 		</div>
 	</div>
 </template>
 
 <script setup lang='ts'>
+import { computed, onBeforeUnmount, ref } from 'vue'
+import dayjs from 'dayjs'
 import { useScreenStore } from '@/store'
-import logo from '@/assets/vue.svg'
 import darkIcon from '@/assets/images/screen/qiehuan_dark.png'
 import lightIcon from '@/assets/images/screen/qiehuan_light.png'
-import githubIcon from '@/assets/github.svg'
-import { computed } from 'vue'
+import githubIconDark from '@/assets/images/screen/github_dark.svg'
+import githubIconLight from '@/assets/images/screen/github_light.svg'
 const store = useScreenStore()
 
 const icon = computed(() => store.theme === 'dark' ? darkIcon : lightIcon)
+const githubIcon = computed(() => store.theme === 'dark' ? githubIconDark : githubIconLight)
 
+const currentTime = ref('')
+const timeId = ref()
 function handleChangeTheme() {
 	store.$patch({
 		theme: store.theme === 'dark' ? 'light' : 'dark'
 	})
 }
+
+function startTime() {
+	timeId.value = setTimeout(() => {
+		currentTime.value = dayjs().format('YYYY-MM-DD HH:mm:ss')
+		startTime()
+	}, 1000)
+}
+
+onBeforeUnmount(() => {
+	clearTimeout(timeId.value)
+})
+
+startTime()
 </script>
 
 <style lang='scss' scoped>
