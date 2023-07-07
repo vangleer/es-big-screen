@@ -12,6 +12,7 @@ import AMap from './AMap.vue'
 
 <style lang='scss' scoped>
 .es-center {
+	position: relative;
 	width: 100%;
 	height: 1000px;
 	padding: 0 16px;
