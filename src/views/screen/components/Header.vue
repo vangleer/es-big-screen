@@ -55,6 +55,7 @@ startTime()
 	background-image: url('@/assets/images/screen/header_border_dark.png');
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
+	animation: fade 3s;
 	&-title {
 		position: absolute;
 		left: 50%;
@@ -94,4 +95,12 @@ startTime()
 	}
 }
 
+@keyframes fade {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
 </style>

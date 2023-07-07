@@ -32,8 +32,30 @@ const { containerRef } = useSortable(components)
 	height: 320px;
 	background-color: var(--es-block-bg);
 	padding: 16px;
+	animation-name: slide;
+	&:nth-child(1) {
+		animation-duration: 0.5s;
+	}
+	&:nth-child(2) {
+		animation-duration: 1s;
+	}
+	&:nth-child(3) {
+		animation-duration: 1.5s;
+	}
 	& + & {
 		margin-top: 20px;
 	}
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+  }
+  80% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 </style>
