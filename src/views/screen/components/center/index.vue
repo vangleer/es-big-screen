@@ -16,10 +16,10 @@ import AMap from './AMap.vue'
 	width: 100%;
 	height: 1000px;
 	padding: 0 16px;
-	animation: slide 1.5s;
+	animation: slideAndFade 1.5s;
 }
 
-@keyframes slide {
+@keyframes slideAndFade {
   0% {
     transform: translateY(218px);
 		opacity: 0;
