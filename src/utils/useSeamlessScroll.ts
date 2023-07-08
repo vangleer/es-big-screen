@@ -1,7 +1,7 @@
 import { onMounted, shallowRef, Ref } from 'vue'
 import anime from 'animejs/lib/anime.es.js'
 
-type OptionsType = {
+export type OptionsType = {
 	direction?: 'horizontal' | 'vertical'
 	gap?: number
 	duration?: number
@@ -22,9 +22,11 @@ export function useSeamlessScroll(listRef: Ref<HTMLElement | null>, options: Opt
 
 		const transKey = isHorizontal ? 'x' : 'y'
 
+		// items
 		const children = listRef.value?.children || []
 		if (!children.length) return
 
+		// 第一个元素
 		const firstEl =  children[0] as HTMLElement
 		const firstDiff = (isHorizontal ? firstEl.offsetWidth : firstEl.offsetHeight ) + gap
 
@@ -37,7 +39,7 @@ export function useSeamlessScroll(listRef: Ref<HTMLElement | null>, options: Opt
 		anime.set(children, {
 			[translateKey]: (el: HTMLElement, i) => {
 
-				const distance = (isHorizontal ? el.offsetWidth : el.offsetHeight ) + gap * 2
+				const distance = (isHorizontal ? el.offsetWidth : el.offsetHeight ) + gap
 				total += distance
 
 				const diff = (i - 1) * distance
@@ -45,13 +47,17 @@ export function useSeamlessScroll(listRef: Ref<HTMLElement | null>, options: Opt
 				return diff
 			}
 		})
+		console.log(transList, total, 'transList')
+		// 设置list容器的宽或高
+		listRef.value!.style[isHorizontal ? 'width' : 'height'] = total + 'px'
 
 		// 添加动画
 		animation.value = anime({
 			targets: transList,
 			duration,
 			easing: 'linear',
-			[transKey]: isHorizontal ? `+=${total}` : `-=${total}`,
+			direction: isHorizontal ? undefined : 'reverse',
+			[transKey]: `+=${total}`,
 			loop: true,
 			update: () => {
 				anime.set(children, {

@@ -66,6 +66,7 @@ const { screenRef } = useResize()
 	}
 	&-center {
 		flex: 1;
+		width: calc(var(--es-screen-width) - 1000px);
 	}
 	&-left, &-right {
 		width: 460px;
