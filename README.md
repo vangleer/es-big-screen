@@ -9,14 +9,15 @@
 *   入场动画
 *   无缝滚动
 
-[在线示例](https://vangleer.github.io/es-big-screen)
+<p align="middle">
+	<img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b081ca832bb5452aa0f4394c58b7656f~tplv-k3u1fbpfcp-watermark.image" />
+</p>
 
 ## 相关文档
 
 [公共组件封装指南](https://juejin.cn/post/7248242431659966522)
 
 [入场动画和无缝滚动](https://juejin.cn/post/7248242431659966522)
-
 
 ## 基本使用
 
@@ -32,6 +33,3 @@ yarn dev
 # 访问 http://127.0.0.1:3006/
 ```
 
-- 效果展示
-
-![06.gif](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b081ca832bb5452aa0f4394c58b7656f~tplv-k3u1fbpfcp-watermark.image?)
