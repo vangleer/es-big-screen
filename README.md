@@ -10,7 +10,7 @@
 *   无缝滚动
 
 <p align="middle">
-	<img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b081ca832bb5452aa0f4394c58b7656f~tplv-k3u1fbpfcp-watermark.image" />
+	<img src="https://vangleer.github.io/es-big-screen/banner.gif" />
 </p>
 
 ## 相关文档
