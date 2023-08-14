@@ -38,16 +38,11 @@ export function useSeamlessScroll(listRef: Ref<HTMLElement | null>, options: Opt
 		// 设置初始位置
 		anime.set(children, {
 			[translateKey]: (el: HTMLElement, i) => {
-
 				const distance = (isHorizontal ? el.offsetWidth : el.offsetHeight ) + gap
 				total += distance
-
-				const diff = (i - 1) * distance
-				transList[i] = { [transKey]: diff }
-				return diff
+				transList[i] = { [transKey]: total - distance }
 			}
 		})
-		console.log(transList, total, 'transList')
 		// 设置list容器的宽或高
 		listRef.value!.style[isHorizontal ? 'width' : 'height'] = total + 'px'
 
