@@ -37,11 +37,11 @@ const { containerRef } = useSortable(components)
 	& + & {
 		margin-top: 20px;
 	}
-	&:nth-child(1) {
+	&[name=left1] {
 		height: 550px;
 		animation-duration: .8s;
 	}
-	&:nth-child(2) {
+	&[name=left2] {
 		animation-duration: 1.5s;
 	}
 }
