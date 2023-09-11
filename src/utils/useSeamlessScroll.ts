@@ -1,4 +1,4 @@
-import { onMounted, shallowRef, Ref } from 'vue'
+import { onMounted, shallowRef, Ref, onUpdated, onBeforeUpdate, watch, nextTick } from 'vue'
 import anime from 'animejs/lib/anime.es.js'
 
 export type OptionsType = {
@@ -8,14 +8,15 @@ export type OptionsType = {
 }
 
 export function useSeamlessScroll(listRef: Ref<HTMLElement | null>, options: OptionsType = {}) {
-	const {
-		direction = 'horizontal',
-		gap = 10,
-		duration = 10000
-	} = options
 	const animation = shallowRef<ReturnType<typeof anime>>(null)
+	const transList: any = []
 
 	function init() {
+		const {
+			direction = 'horizontal',
+			gap = 10,
+			duration = 10000
+		} = options
 		const isHorizontal = direction === 'horizontal'
 
 		const translateKey = isHorizontal ? 'translateX' : 'translateY'
@@ -33,7 +34,7 @@ export function useSeamlessScroll(listRef: Ref<HTMLElement | null>, options: Opt
 		// 默认将list元素向左或向上移动一个item的距离
 		listRef.value!.style.transform = `${translateKey}(-${firstDiff}px)`
 
-		const transList: any = []
+
 		let total = 0 // 总宽/高
 		// 设置初始位置
 		anime.set(children, {
@@ -63,6 +64,24 @@ export function useSeamlessScroll(listRef: Ref<HTMLElement | null>, options: Opt
 			}
 		})
 	}
+
+	watch(() => options, () => {
+		// 移除上一次的
+		animation.value.remove(transList)
+		nextTick(() => {
+			// 重新初始化
+			init()
+		})
+	}, { deep: true })
+
+	onBeforeUpdate(() => {
+		// 移除上一次的
+		animation.value.remove(transList)
+	})
+	onUpdated(() => {
+		// 重新初始化
+		init()
+	})
 	// 暂停
 	function pause() {
 		animation.value!.pause()
@@ -83,3 +102,5 @@ export function useSeamlessScroll(listRef: Ref<HTMLElement | null>, options: Opt
 		animation
 	}
 }
+
+
